@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define MNP_SYNC_CHAR						0x81FF //синхрослово mnp-сообщения
+
 #define CAN_BAUDRATE                                 125000
 #define CAN_SAMPLEPOINT_NUM                          75
 #define CAN_SAMPLEPOINT_DENOM                        100

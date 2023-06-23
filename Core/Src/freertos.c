@@ -29,7 +29,9 @@
 #include "MNP_msg.h"
 #include "usart.h"
 #include "typedef.h"
+#include "protocol.h"
 #include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,8 +51,12 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
+	
 MNP_MSG_t MNP_PUT_MSG; //иницализация шаблона сообщения для отправки приёмнику
-MNP_MSG_t MNP_GET_MSG;
+MNP_MSG_t MNP_GET_MSG =
+{
+	.rx_state = __SYNC_BYTE1 //иницализация структуры сообщения полученного от приёмника
+};
 
 osTimerId osProgTimerGPSUARTTimeout;  
 osTimerId osProgTimerGPSCfg;
@@ -144,7 +150,7 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-	osThreadDef (Task_Parse_GPS_msg, Parse_GPS_msg, osPriorityNormal, 0, 256); 
+	osThreadDef (Task_Parse_GPS_msg, Parse_GPS_msg, osPriorityAboveNormal, 0, 256); 
 	Task_Parse_GPS_msg_Handle = osThreadCreate(osThread(Task_Parse_GPS_msg), NULL); 	
 	
   osThreadDef (Task_Switch_Led, Switch_Led, osPriorityLow, 0, 128); 
@@ -164,15 +170,19 @@ void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
 	GPS_Init(&MNP_PUT_MSG);
-	osDelay (250);
-//	read_config_MNP (&MNP_PUT_MSG);
-//	osDelay (250);
-  /* Infinite loop */
+	osDelay (1000);
+	//Set_GNSS_interval (&MNP_PUT_MSG, 2000); //2000=1c, 1000=5c
+	osDelay (1000);
+	
   for(;;)
   {
-	//	read_config_MNP (&MNP_PUT_MSG);
-	//	put_msg2000 (&MNP_PUT_MSG);
-    osDelay(5000);
+	/*	read_config_MNP (&MNP_PUT_MSG);
+		//Read_SN (&MNP_PUT_MSG);
+    osDelay(5000);*/
+		
+		//read_config_MNP (&MNP_PUT_MSG);
+		//put_msg2000 (&MNP_PUT_MSG);
+		osDelay(5000);
   }
   /* USER CODE END StartDefaultTask */
 }
@@ -183,33 +193,24 @@ void StartDefaultTask(void const * argument)
 void Parse_GPS_msg (void const * argument)
 {
 	int8_t result = -1;
-	uint16_t byte_i = 0;
-	osTimerStart(osProgTimerGPSUARTTimeout, 5000);
-	MNP_GET_MSG.rx_state = 1;
+	uint32_t tickcount = osKernelSysTick();
+	osTimerStart(osProgTimerGPSUARTTimeout, 5000); //таймера обработки таймаута получения сообщения от приёмника
 	
 	for(;;)
   {
-		result = (Parse_MNP_MSG (&MNP_GET_MSG));
-		
-/*		if (result < 0)
+		result = (Parse_MNP_MSG (&MNP_GET_MSG)); //парсинг сообщения от приёмника		
+		if (result > 0) //если сообщение от приёмника получено
 		{
-			osTimerStart(osProgTimerGPSUARTTimeout, 5000);
-		}*/
-		
-		if (MNP_GET_MSG.rx_state != 1)
-		{
-			sprintf (buffer_TX_UART2, "return byte_i=%u, state=%u\r\n", byte_i, MNP_GET_MSG.rx_state);
-			UART2_PutString (buffer_TX_UART2);
+		//	osTimerStart(osProgTimerGPSUARTTimeout, 5000); //перегрузка таймера обработки таймаута
 		}
-		
-		
-		osDelay (100);
+		osDelayUntil (&tickcount, 100);
 	}
 }
 
 //---------------------------------------------мигание светодиодом---------------------------------------------//
 void Switch_Led (void const * argument)
 {
+	LED_RED(ON);
 	for(;;)
   {
 		TOOGLE_LED_RED();
@@ -220,14 +221,14 @@ void Switch_Led (void const * argument)
 //------------------------------------------------------------------------------------------//
 void osProgTimerGPSUARTTimeoutCallback(void const *argument)
 {
-	MNP_Reset(&MNP_PUT_MSG);
-	osTimerStart(osProgTimerGPSCfg, GPS_RST_DELAY); //задержка перед отправкой конф. сообщения приёмнику
+	//MNP_Reset(&MNP_PUT_MSG); //отправка команды перезагрузки приёмника
+	//osTimerStart(osProgTimerGPSCfg, GPS_RST_DELAY); //задержка перед отправкой конф. сообщения приёмнику
 }
 
 //------------------------------------------------------------------------------------------//
 void osProgTimerGPSCfgCallback (void const *argument)
 {
-//	GPS_Init(&MNP_PUT_MSG);
+	GPS_Init(&MNP_PUT_MSG);
 }
 
 /* USER CODE END Application */

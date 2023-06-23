@@ -4,18 +4,19 @@
 // Includes ------------------------------------------------------------------------//
 #include "main.h"
 
-/* Exported types ------------------------------------------------------------*/
+// Exported types -----------------------------------------------------------------//
 #pragma anon_unions(1)
 #pragma pack(1)
-typedef union _MY_FLAGS
+
+/*typedef union _MY_FLAGS
 {
 	unsigned int Value;
 	struct //Битовые поля
 	{
 		unsigned CAN_Fail				: 1;	//тип unsigned, длина поля 1 бит, статус CAN	( нет приема собственных сообщений C2 )
-		unsigned UART_state			: 1; //тип unsigned, длина поля 4 бита, статус RS-232
+		unsigned UART_state			: 1; //тип unsigned, длина поля 1 бит
 	};
-}TMyFlags;
+}TMyFlags;*/
 
 //------------------------------------------------------------------
 typedef struct 
@@ -56,9 +57,9 @@ typedef union
 //------------------------------------------------------------------
 typedef struct 
 {
-	uint8_t ID;
+	uint8_t ID; 
 	uint8_t Addr;
-	uint8_t (*GetAddr)(void);
+	uint8_t (*GetAddr)(void); //указатель на ф-ю получения адреса платы
 	void (*MsgA1Send)(void);
 } CAN_CONTEXT_t;
 
@@ -76,15 +77,15 @@ typedef struct
 	CAN_CONTEXT_t 	canContext; //структура с данными для CAN заголовка
 	CONFIG_CONTEXT_t cfgContext; //Max_gDOP - суммарное геометрическое снижение точности по местоположению и времени
 } MKS2_t;
+
 #pragma pack()
 #pragma anon_unions()
 
 //Private defines ------------------------------------------------------------------//
 
-#define BUFFER_SIZE 512						 //размер буффера обмена с GPS-приемником
+#define BUFFER_SIZE 					512					//размер буффера обмена с GPS-приемником
 
-#define DEFAULT_MIN_gDOP							((float)1.0)
-#define DEFAULT_MAX_gDOP							((float)4.0)
+#define DEFAULT_MAX_gDOP		((float)4.0) //максимально допустимый gDOP
 
 #define MNP_UART		((USART_TypeDef *)USART1_BASE)
 
@@ -109,8 +110,9 @@ typedef struct
 #define MY_BACKPLANE_ADDR4_PIN		LL_GPIO_PIN_8       
 #define MY_BACKPLANE_ADDR4_PORT		GPIOA    
 
-#define GPS_RST_DELAY									500
+#define GPS_RST_DELAY						500
 
+#define MNP_SYNC_CHAR						0x81FF //синхрослово mnp-сообщени¤
 //Constants ----------------------------------------------------------------------//
 
 #endif

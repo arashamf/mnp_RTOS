@@ -1,0 +1,10 @@
+mnp_rtos\time64.o: ..\Time64\time64.c
+mnp_rtos\time64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+mnp_rtos\time64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+mnp_rtos\time64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+mnp_rtos\time64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+mnp_rtos\time64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+mnp_rtos\time64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
+mnp_rtos\time64.o: ..\Time64\time64.h
+mnp_rtos\time64.o: ..\Time64\time64_config.h
+mnp_rtos\time64.o: ..\Time64\time64_limits.h

@@ -43,5 +43,4 @@ mnp_rtos\usart.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h
 mnp_rtos\usart.o: ../Core/Inc/typedef.h
 mnp_rtos\usart.o: ../Core/Inc/main.h
 mnp_rtos\usart.o: ../Core/Inc/ring_buffer.h
-mnp_rtos\usart.o: ../Core/Inc/MNP_msg.h
 mnp_rtos\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

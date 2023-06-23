@@ -22,13 +22,13 @@
 
 /* USER CODE BEGIN 0 */
 #include "typedef.h"
-#include "MNP_msg.h"
+//#include "MNP_msg.h"
 #include "ring_buffer.h"
 #include <stdio.h>
 
 char buffer_TX_UART2 [80];
 RING_buffer_t RING_buffer; //структура с кольцевым буффером
-uint8_t uart_buffer[2*BUFFER_SIZE]; //массив для кольцевого буффера
+uint8_t uart_buffer[BUFFER_SIZE]; //массив для кольцевого буффера
 /* USER CODE END 0 */
 
 /* USART1 init function */
@@ -75,7 +75,7 @@ void MX_USART1_UART_Init(void)
   /* USER CODE END USART1_Init 1 */
   USART_InitStruct.BaudRate = 115200;
   USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
-  USART_InitStruct.StopBits = LL_USART_STOPBITS_2;
+  USART_InitStruct.StopBits = LL_USART_STOPBITS_1;
   USART_InitStruct.Parity = LL_USART_PARITY_NONE;
   USART_InitStruct.TransferDirection = LL_USART_DIRECTION_TX_RX;
   USART_InitStruct.HardwareFlowControl = LL_USART_HWCONTROL_NONE;

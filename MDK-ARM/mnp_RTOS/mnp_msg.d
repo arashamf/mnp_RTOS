@@ -44,6 +44,11 @@ mnp_rtos\mnp_msg.o: ../Core/Inc/typedef.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/main.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/usart.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/ring_buffer.h
+mnp_rtos\mnp_msg.o: ../Core/Inc/protocol.h
+mnp_rtos\mnp_msg.o: ../Core/Inc/pins.h
+mnp_rtos\mnp_msg.o: ../Time64/time64.h
+mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+mnp_rtos\mnp_msg.o: ../Time64/time64_config.h
 mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

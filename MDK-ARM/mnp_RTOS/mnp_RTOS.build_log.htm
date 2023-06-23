@@ -22,19 +22,19 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 D:\DOCS\STM32_works\mnp_RTOS\MDK-ARM\mnp_RTOS.uvprojx
-Project File Date:  06/16/2023
+Project File Date:  06/22/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'mnp_RTOS'
-compiling freertos.c...
-../Core/Src/freertos.c(188): warning:  #188-D: enumerated type mixed with another type
-        MNP_GET_MSG.rx_state = 1;
-../Core/Src/freertos.c(185): warning:  #550-D: variable "result"  was set but never used
-        int8_t result = -1;
-../Core/Src/freertos.c: 2 warnings, 0 errors
+compiling MNP_msg.c...
+..\Core\Src\MNP_msg.c(448): warning:  #1-D: last line of file ends without a newline
+  }
+..\Core\Src\MNP_msg.c(407): warning:  #177-D: function "GPS_Read_Data"  was declared but never referenced
+  static void GPS_Read_Data(MNP_MSG_t *Msg)
+..\Core\Src\MNP_msg.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=19744 RO-data=592 RW-data=168 ZI-data=9824  
+Program Size: Code=30512 RO-data=864 RW-data=780 ZI-data=8780  
 FromELF: creating hex file...
 "mnp_RTOS\mnp_RTOS.axf" - 0 Error(s), 2 Warning(s).
 
@@ -60,7 +60,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

@@ -44,6 +44,7 @@
 "mnp_rtos\cmsis_os.o"
 "mnp_rtos\heap_4.o"
 "mnp_rtos\port.o"
+"mnp_rtos\time64.o"
 --strict --scatter "mnp_RTOS\mnp_RTOS.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

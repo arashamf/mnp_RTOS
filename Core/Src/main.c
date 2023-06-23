@@ -26,12 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <string.h> 
-#include <stdio.h>
-#include "typedef.h"
-#include "protocol.h"
-#include "MNP_msg.h"
-#include "pins.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,8 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-TMyFlags g_MyFlags = { 1 }; //инициализация битового поля (CAN_Fail == 1) 
-MKS2_t MKS2;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -90,23 +84,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-	//инициализация структуры типа MKS2_t
-	MKS2_t MKS2 = 
-	{
-		.tmContext.Time2k = 0,
-		.tmContext.TAI_UTC_offset = 0,
-		.tmContext.LeapS_59 = 0,
-		.tmContext.LeapS_61 = 0,
-		.tmContext.ValidTHRESHOLD = 0,
-		.tmContext.Valid = 0,
-		
-		.canContext.ID = MODULE_TYPE_MKNS, //инициализация типа модуля
-		//.canContext.GetAddr = &Get_Module_Address, //инициализация указателя на функцию получения адреса в кросс-плате
-		.canContext.Addr = Get_Module_Address(),
-		.fContext.Fail = 0,
-		
-		.cfgContext.Max_gDOP = DEFAULT_MAX_gDOP
-	};
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -116,8 +94,8 @@ int main(void)
 //  MX_TIM3_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
-	//GPS_Init();
-	LED_RED(ON);
+
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

@@ -15,7 +15,6 @@ extern "C" {
 #define CMD_CODE_CONFIG 2
 #define CMD_CODE_SATTELITES_MASK 6
 
-#define MNP_SYNC_CHAR						0x81FF //синхрослово mnp-сообщения
 //Exported types -----------------------------------------------------------------//
 typedef enum
 {
@@ -134,7 +133,9 @@ typedef struct
 			uint32_t	QZSS_SBAS;
 			uint32_t	BDS;*/
 		} sat_mask;
-
+		
+		uint32_t	interval; //Длина интервала измерения (2000=1c), код команды 0х07
+		
 		struct //Маска сброса (использовать с кодом команды specialcmd_3006)
 		{
 			uint32_t rtc    				: 1; //сброс RTC
@@ -156,46 +157,46 @@ typedef struct
 		double 				longitude;       // Широта D рад
 		double 				latitude;        // Долгота D рад
 		double 				hor_height;	     // Высота D м
-		double 				hor_vel;		 // Модуль наземной скорости D м/с
-		double 				azimuth;		 // Азимут D рад
-		double 				vert_vel;		 // Скорость подъема D м/с
-		uint32_t      		channels;		 // Каналы в решении
-		uint32_t      		diff_corr;       // Наличие дифференциальных поправок
-		int32_t 			year;			 // Год DI год -
-		int32_t 			month;			 // Месяц DI месяц 1-12
+		double 				hor_vel;		 			// Модуль наземной скорости D м/с
+		double 				azimuth;		 		// Азимут D рад
+		double 				vert_vel;		 		// Скорость подъема D м/с
+		uint32_t      channels;		 		// Каналы в решении
+		uint32_t      diff_corr;       // Наличие дифференциальных поправок
+		int32_t 			year;			 			// Год DI год -
+		int32_t 			month;					 // Месяц DI месяц 1-12
 		int32_t 			day;             // День DI день 1-31
-		int32_t 			hour;			 // Час DI ч 0-23
-		int32_t 			minute;			 // Минута DI мин 0-59
-		int32_t 			second;			 // Секунда DI с 0-60
-		uint32_t 			msec;			 // Внутреннее время приемника UDI мс - Цена младшего разряда 0,5 мс
-		float				Hz;              // Отстройка генератора F Гц -
-		float				gDOP;			 // GDOP F - -
-		float				pDOP;			 // PDOP F - -
-		double	        	fil_lon;		 // Фильтрованная широта D рад -
-		double		        fil_lat;		 // Фильтрованная долгота D рад -
-		double      		fil_height;      // Фильтрованная высота D м -
-		double        		fil_vel_module;	 // Фильтрованная скорость (модуль) D м/с -
-		double        		fil_vel_az;		 // Фильтрованная скорость (азимут) D рад -
-		double        		fil_vel_vert;    // Фильтрованная скорость (подъем) D м/с -
+		int32_t 			hour;			 			// Час DI ч 0-23
+		int32_t 			minute;			 			// Минута DI мин 0-59
+		int32_t 			second;			 			// Секунда DI с 0-60
+		uint32_t 			msec;			 			// Внутреннее время приемника UDI мс - Цена младшего разряда 0,5 мс
+		float					Hz;              // Отстройка генератора F Гц -
+		float					gDOP;						 // GDOP F - -
+		float					pDOP;			 			// PDOP F - -
+		double	    	fil_lon;		 		// Фильтрованная широта D рад -
+		double		    fil_lat;		 		// Фильтрованная долгота D рад -
+		double      	fil_height;      // Фильтрованная высота D м -
+		double        fil_vel_module;	 // Фильтрованная скорость (модуль) D м/с -
+		double        fil_vel_az;		 // Фильтрованная скорость (азимут) D рад -
+		double        fil_vel_vert;    // Фильтрованная скорость (подъем) D м/с -
 			
 		struct  // Флаги 
 		{                     
 			uint32_t two_dim_sol	: 1; // Двухмерное решение
-			uint32_t fix_diff		: 1; // Фиксированная невязка времени между GPS и ГЛОНАСС
+			uint32_t fix_diff			: 1; // Фиксированная невязка времени между GPS и ГЛОНАСС
 			uint32_t ellipsoid		: 2; // Эллипсоид 0-WGS-84, 1-ПЗ-90, 2- Красовского, 3 – пользователя
-			uint32_t GPS			: 1; // Годность решения
-			uint32_t UTC			: 1; // Годность времени 
-			uint32_t				: 4; // Резерв
+			uint32_t GPS					: 1; // Годность решения
+			uint32_t UTC					: 1; // Годность времени 
+			uint32_t							: 4; // Резерв
 			uint32_t system_coord	: 3; // Система координат 0 - WGS-84, 1- ПЗ-90, 2 - СК-42, 3 - СК-95, 4 - определяется пользователем, 5-7 резерв
 			uint32_t diff_mode		: 1; // Дифференциальный режим
-			uint32_t 				: 2; // Резерв
-			uint32_t				: 2; // Резерв
+			uint32_t 							: 2; // Резерв
+			uint32_t							: 2; // Резерв
 			uint32_t flags_ver		: 4; // Версия флагов
 		}flags;	
 
-		uint32_t			ephemerides;       // Наличие эфемерид 
+		uint32_t		ephemerides;       // Наличие эфемерид 
 		float				temperature;       // Температура °C - При наличии термодатчика
-		uint32_t			failed_meas;       // Отбракованные измерения. 1 – измерения отбракованы алгоритмом RAIM
+		uint32_t		failed_meas;       // Отбракованные измерения. 1 – измерения отбракованы алгоритмом RAIM
 	};	
 }MNP_MSG_3000_t;
 
@@ -285,19 +286,18 @@ typedef struct
 
 //Constants ----------------------------------------------------------------------//
 //Private prototypes--------------------------------------------------------------//
-uint16_t MNP_CalcChkSum( uint16_t *Array, int WordsCount );
+static uint16_t MNP_CalcChkSum( uint16_t *Array, int WordsCount );
 static void MNP_PutMessage (USART_TypeDef *USARTx, MNP_MSG_t *Msg, uint16_t MsgId, uint16_t WordsCount);
 static void MNP_M7_init (MNP_MSG_t *);
 void read_config_MNP ( MNP_MSG_t *);
 void read_flash_MNP ( MNP_MSG_t *);
-void put_msg2000 (MNP_MSG_t *Msg);
-uint8_t get_msg (MNP_MSG_t * , uint16_t);
-//int8_t Parse_MNP_MSG (MNP_MSG_t * , uint16_t);
+void put_msg2000 (MNP_MSG_t *);
+void Set_GNSS_interval (MNP_MSG_t *, uint32_t );
+void Read_SN (MNP_MSG_t *);
 int8_t Parse_MNP_MSG (MNP_MSG_t * );
 void GPS_Init(MNP_MSG_t *);
-static void GPS_RST(FunctionalState NewState);
+static void GPS_RST(FunctionalState );
 void MNP_Reset(MNP_MSG_t *);
-static void MNP_MakeMessage_Reset(MNP_MSG_t *);
 #ifdef __cplusplus
 }
 #endif

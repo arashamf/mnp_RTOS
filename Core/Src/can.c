@@ -59,7 +59,17 @@ static MESSAGE_C2_t MESSAGE_C2; //структура для сообщения типа С2
 static MESSAGE_A1_t MESSAGE_A1; //структура для сообщения А1
 //static MESSAGE_B_CONFIG_t MESSAGE_B_CONFIG; //структура для получаемого конфигурационного сообщения типа В
 //static MESSAGE_B_SERVICE_t MESSAGE_B_SERVICE; //структура для получаемого настроечного сообщения типа В
+typedef union _MY_FLAGS
+{
+	unsigned int Value;
+	struct //Ѕитовые пол¤
+	{
+		unsigned CAN_Fail				: 1;	//тип unsigned, длина пол¤ 1 бит, статус CAN	( нет приема собственных сообщений C2 )
+		unsigned UPS_state			: 4; //тип unsigned, длина пол¤ 4 бита, статус RS-232
+	};
+}TMyFlags;
 
+TMyFlags g_MyFlags = { 1 }; //инициализация битового поля (CAN_Fail == 1) 
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan;

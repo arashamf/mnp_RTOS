@@ -60,8 +60,3 @@ mnp_rtos\main.o: ../Core/Inc/tim.h
 mnp_rtos\main.o: ../Core/Inc/usart.h
 mnp_rtos\main.o: ../Core/Inc/ring_buffer.h
 mnp_rtos\main.o: ../Core/Inc/gpio.h
-mnp_rtos\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-mnp_rtos\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-mnp_rtos\main.o: ../Core/Inc/protocol.h
-mnp_rtos\main.o: ../Core/Inc/MNP_msg.h
-mnp_rtos\main.o: ../Core/Inc/pins.h
