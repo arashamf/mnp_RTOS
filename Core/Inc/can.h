@@ -143,10 +143,12 @@ typedef enum { RX_NONE = 0, RX_C1, RX_OWN_C2, RX0, RX1}  TRxResult; //статусы по
 void MX_CAN_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+void CAN1_RX_Process(void);
+void MKS2_CAN_Init(void);
 void Task_CANRX (void);
 uint32_t Send_Message_C2  (void);
 uint32_t Send_Message_A1 (void);
-uint32_t CAN1_Send_Message (CAN_TxHeaderTypeDef * TxHeader, uint8_t * CAN_TxData);
+uint32_t CAN1_Send_Message (CAN_TxHeaderTypeDef * , uint8_t * );
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

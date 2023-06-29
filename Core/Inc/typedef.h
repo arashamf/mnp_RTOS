@@ -21,22 +21,29 @@
 //------------------------------------------------------------------
 typedef struct 
 {
-	void (*GPS_RST)(FunctionalState NewState); //указатель на ф-ю аппаратной перезагрузки приЄмника
-	uint32_t rst_delay; //задержка при перезагрузки приЄмника
+	uint16_t rst_delay; //задержка при перезагрузке приЄмника
+	uint16_t cfg_msg_delay; //задержка при отправке конф. сообщени€ приЄмника 
+	uint16_t parse_delay;
+	enum 
+	{
+		__SYNC_RST = 1, //стади€ перезагрузки модул€
+		__SYNC_LOAD_CFG //стади€ отправки конфигурационных сообщений модул€
+	}	cfg_state;
 } MNP_M7_CFG_t;
 
 //------------------------------------------------------------------
 typedef struct 
 {
-	uint32_t 	Time2k;
-	int8_t		TAI_UTC_offset;
-	uint16_t 	ValidTHRESHOLD;
+	uint32_t 	Time2k; //количество секунд с 01.01.2000
+	float Max_gDOP; //максимально допустимый gDOP
+	int8_t		TAI_UTC_offset; // //разница между атомным временем и временем UTC
+	uint8_t 	ValidTHRESHOLD; 	// "сдвиговый регистр" накапливающий достоверность
 	struct 
 	{
 		uint8_t 						: 5;
-		uint8_t		LeapS_59 	: 1;
-		uint8_t		LeapS_61 	: 1;
-		uint8_t		Valid 		: 1;	
+		uint8_t		LeapS_59 	: 1; //флаг "високосной" секунды (последн€€ минута суток содержит 59 секунд)
+		uint8_t		LeapS_61 	: 1; //флаг "високосной" секунды (последн€€ минута суток содержит 61 секунду)
+		uint8_t		Valid 		: 1; //флаг достоверности данных	
 	};
 } TM_CONTEXT_t;
 
@@ -45,29 +52,23 @@ typedef union
 {	
 	struct 
 	{
-		uint16_t										: 12;
-		uint16_t GPSAntDisconnect 	: 1;
-		uint16_t GPSAntShortCircuit : 1;
-		uint16_t GPS 								: 1;
-		uint16_t CAN 								: 1;
+		uint8_t											: 4;
+		uint8_t GPSAntDisconnect 		: 1;
+		uint8_t GPSAntShortCircuit 	: 1;
+		uint8_t GPS 								: 1;
+		uint8_t CAN 								: 1;
 	};
-	uint16_t Fail;
+	uint8_t Fail;
 } FAIL_CONTEXT_t;
 
 //------------------------------------------------------------------
 typedef struct 
 {
-	uint8_t ID; 
-	uint8_t Addr;
+	uint8_t ID; 							//тип модул€ дл€ CAN-заголовка
+	uint8_t Addr; 						//адрес в кросс-плате
 	uint8_t (*GetAddr)(void); //указатель на ф-ю получени€ адреса платы
-	void (*MsgA1Send)(void);
+	uint32_t (*MsgA1Send)(void);
 } CAN_CONTEXT_t;
-
-//------------------------------------------------------------------
-typedef struct 
-{
-	float Max_gDOP;
-} CONFIG_CONTEXT_t;
 
 //------------------------------------------------------------------
 typedef struct 
@@ -75,7 +76,6 @@ typedef struct
 	TM_CONTEXT_t 		tmContext; //структура с временными смещени€ми
 	FAIL_CONTEXT_t 	fContext; //битовое поле со статусами gps-приЄмника
 	CAN_CONTEXT_t 	canContext; //структура с данными дл€ CAN заголовка
-	CONFIG_CONTEXT_t cfgContext; //Max_gDOP - суммарное геометрическое снижение точности по местоположению и времени
 } MKS2_t;
 
 #pragma pack()
@@ -85,7 +85,8 @@ typedef struct
 
 #define BUFFER_SIZE 					512					//размер буффера обмена с GPS-приемником
 
-#define DEFAULT_MAX_gDOP		((float)4.0) //максимально допустимый gDOP
+#define DEFAULT_MAX_gDOP		((float)4.0) //максимально допустимый gDOP по умолчанию
+#define DEFAULT_MASK_ValidTHRESHOLD		((uint16_t)0x0004) //количество полученных достоверных передач от приЄмника
 
 #define MNP_UART		((USART_TypeDef *)USART1_BASE)
 
@@ -110,7 +111,9 @@ typedef struct
 #define MY_BACKPLANE_ADDR4_PIN		LL_GPIO_PIN_8       
 #define MY_BACKPLANE_ADDR4_PORT		GPIOA    
 
-#define GPS_RST_DELAY						500
+#define GPS_RST_DELAY						200
+#define GPS_CFG_MSG_DELAY				75
+#define GPS_PARSE_DELAY					100	
 
 #define MNP_SYNC_CHAR						0x81FF //синхрослово mnp-сообщени§
 //Constants ----------------------------------------------------------------------//

@@ -139,19 +139,20 @@ void MX_USART2_UART_Init(void)
 }
 
 /* USER CODE BEGIN 1 */
-//-------------------------------передача символа по UART1-----------------------------------//
-void MNP_UART_PutByte(char c)
+//-----------------------------------передача 1 байта по UART приёмнику---------------------------------------//
+void MNP_UART_PutByte(uint8_t c)
 {
-	while(!(USART1->SR & USART_SR_TC)) {}; 
-	MNP_UART->DR = c; 
+	while(!(MNP_UART->SR & USART_SR_TC)) {}; 
+		MNP_UART->DR = c; 
 }
 
-//-------------------------------передача строки по UART1-----------------------------------//
-void MNP_UART_PutString(const char *str)
+//-------------------------------передача массива данных по UART приёмнику-----------------------------------//
+void MNP_UART_MSG_Puts( const uint8_t *bin, uint16_t lenght_msg)
 {
-	char smb;
-	while ((smb = *str++) != 0)
-		{MNP_UART_PutByte(smb);}
+	for (uint8_t i = 0; i < lenght_msg; i++)
+	{
+		MNP_UART_PutByte (*(bin + i));
+	}
 }
 
 //-------------------------------передача символа по UART2-----------------------------------//
@@ -179,13 +180,4 @@ void UART_CharReception_Callback (void)
 		{UART2_PutString ("get_FF\r\n");}*/
 }
 
-//-------------------------------передача бинарных данных по UART-----------------------------------//
-void MNP_UART_Puts(USART_TypeDef *USARTx, const uint8_t *bin, uint16_t lenght_msg)
-{
-	for (uint8_t i = 0; i < lenght_msg; i++)
-	{
-		while(!(USARTx->SR & USART_SR_TC)) {}; 
-		LL_USART_TransmitData8(USARTx, *(bin + i));
-	}
-}
 /* USER CODE END 1 */

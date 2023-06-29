@@ -70,7 +70,7 @@ void Pins_Address_Init(void)
 //-----------------------------------------------------------------------------------------------------//
 uint8_t Get_Module_Address( void )
 {
-  uint8_t count;
+ // uint8_t count;
  // uint32_t result = 0;
 	uint8_t addr = 0x3;
 	

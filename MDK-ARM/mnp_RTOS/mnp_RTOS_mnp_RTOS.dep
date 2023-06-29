@@ -1,8 +1,8 @@
 Dependencies for Project 'mnp_RTOS', Target 'mnp_RTOS': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f103xb.s)(0x648C498B)(--cpu Cortex-M3 -g --apcs=interwork -I ..\Core\Inc-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o mnp_rtos\startup_stm32f103xb.o --depend mnp_rtos\startup_stm32f103xb.d)
-F (..\Core\Src\MNP_msg.c)(0x64954A41)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\mnp_msg.o --omf_browse mnp_rtos\mnp_msg.crf --depend mnp_rtos\mnp_msg.d)
-I (../Core/Inc/MNP_msg.h)(0x64945E20)
+F (..\Core\Src\MNP_msg.c)(0x649D99D0)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\mnp_msg.o --omf_browse mnp_rtos\mnp_msg.crf --depend mnp_rtos\mnp_msg.d)
+I (../Core/Inc/MNP_msg.h)(0x649D8C3E)
 I (../Core/Inc/main.h)(0x64941EF4)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x60ACE905)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x648C497E)
@@ -42,8 +42,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/typedef.h)(0x649D72F8)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 I (../Core/Inc/protocol.h)(0x6492D953)
 I (../Core/Inc/pins.h)(0x648C537F)
@@ -53,7 +53,7 @@ I (../Time64/time64_config.h)(0x5C07EF93)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x602569C4)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x602569C8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602569CE)
-F (..\Core\Src\pins.c)(0x648C553E)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\pins.o --omf_browse mnp_rtos\pins.crf --depend mnp_rtos\pins.d)
+F (..\Core\Src\pins.c)(0x649D5F4D)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\pins.o --omf_browse mnp_rtos\pins.crf --depend mnp_rtos\pins.d)
 I (../Core/Inc/pins.h)(0x648C537F)
 I (../Core/Inc/main.h)(0x64941EF4)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x60ACE905)
@@ -94,7 +94,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 F (..\Core\Src\ring_buffer.c)(0x6492A46C)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\ring_buffer.o --omf_browse mnp_rtos\ring_buffer.crf --depend mnp_rtos\ring_buffer.d)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 I (../Core/Inc/main.h)(0x64941EF4)
@@ -136,13 +136,13 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602569CE)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x602569C4)
 F (..\Core\Inc\protocol.h)(0x6492D953)()
-F (..\Core\Inc\typedef.h)(0x6493EFE1)()
-F (../Core/Src/main.c)(0x6492D8BF)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\main.o --omf_browse mnp_rtos\main.crf --depend mnp_rtos\main.d)
+F (..\Core\Inc\typedef.h)(0x649D72F8)()
+F (../Core/Src/main.c)(0x649D8826)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\main.o --omf_browse mnp_rtos\main.crf --depend mnp_rtos\main.d)
 I (../Core/Inc/main.h)(0x64941EF4)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x60ACE905)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x648C497E)
@@ -182,7 +182,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6412B6D5)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6412B6D5)
 I (../Core/Inc/FreeRTOSConfig.h)(0x648C3D7C)
@@ -197,11 +197,12 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x648C4AA0)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6412B6D5)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6412B6D5)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6412B6D5)
-I (../Core/Inc/can.h)(0x648C50B0)
+I (../Core/Inc/can.h)(0x649D7EAE)
 I (../Core/Inc/tim.h)(0x648C4F2F)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 I (../Core/Inc/gpio.h)(0x648C38FC)
+I (../Core/Inc/MNP_msg.h)(0x649D8C3E)
 F (../Core/Src/gpio.c)(0x648C38FC)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\gpio.o --omf_browse mnp_rtos\gpio.crf --depend mnp_rtos\gpio.d)
 I (../Core/Inc/gpio.h)(0x648C38FC)
 I (../Core/Inc/main.h)(0x64941EF4)
@@ -243,8 +244,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
-F (../Core/Src/freertos.c)(0x6495387F)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\freertos.o --omf_browse mnp_rtos\freertos.crf --depend mnp_rtos\freertos.d)
+I (../Core/Inc/typedef.h)(0x649D72F8)
+F (../Core/Src/freertos.c)(0x649D919C)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\freertos.o --omf_browse mnp_rtos\freertos.crf --depend mnp_rtos\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6412B6D5)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x602569CE)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x642E8A97)
@@ -293,21 +294,21 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6412B6D5)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x648C4AA0)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6412B6D5)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6412B6D5)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6412B6D5)
 I (../Core/Inc/pins.h)(0x648C537F)
-I (../Core/Inc/MNP_msg.h)(0x64945E20)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/MNP_msg.h)(0x649D8C3E)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 I (../Core/Inc/protocol.h)(0x6492D953)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x602569C4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602569CE)
-F (../Core/Src/can.c)(0x64942637)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\can.o --omf_browse mnp_rtos\can.crf --depend mnp_rtos\can.d)
-I (../Core/Inc/can.h)(0x648C50B0)
+F (../Core/Src/can.c)(0x649D8025)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\can.o --omf_browse mnp_rtos\can.crf --depend mnp_rtos\can.d)
+I (../Core/Inc/can.h)(0x649D7EAE)
 I (../Core/Inc/main.h)(0x64941EF4)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x60ACE905)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x648C497E)
@@ -347,11 +348,11 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x602569C4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x602569CC)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x602569CE)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 I (../Core/Inc/pins.h)(0x648C537F)
 I (../Core/Inc/protocol.h)(0x6492D953)
@@ -396,10 +397,10 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
-I (../Core/Inc/MNP_msg.h)(0x64945E20)
-F (../Core/Src/usart.c)(0x64941EF5)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\usart.o --omf_browse mnp_rtos\usart.crf --depend mnp_rtos\usart.d)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/typedef.h)(0x649D72F8)
+I (../Core/Inc/MNP_msg.h)(0x649D8C3E)
+F (../Core/Src/usart.c)(0x649D993F)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\usart.o --omf_browse mnp_rtos\usart.crf --depend mnp_rtos\usart.d)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (../Core/Inc/main.h)(0x64941EF4)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x60ACE905)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x648C497E)
@@ -439,7 +440,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x602569C4)
 F (../Core/Src/stm32f1xx_it.c)(0x6492A206)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\stm32f1xx_it.o --omf_browse mnp_rtos\stm32f1xx_it.crf --depend mnp_rtos\stm32f1xx_it.d)
@@ -482,9 +483,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 I (../Core/Inc/stm32f1xx_it.h)(0x648C3905)
-I (../Core/Inc/usart.h)(0x648C51AE)
+I (../Core/Inc/usart.h)(0x649D99F6)
 I (../Core/Inc/ring_buffer.h)(0x64622C3F)
 F (../Core/Src/stm32f1xx_hal_msp.c)(0x648C3905)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\stm32f1xx_hal_msp.o --omf_browse mnp_rtos\stm32f1xx_hal_msp.crf --depend mnp_rtos\stm32f1xx_hal_msp.d)
 I (../Core/Inc/main.h)(0x64941EF4)
@@ -526,7 +527,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h)(0x60ACE924)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h)(0x60ACE90F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h)(0x60ACE8FD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h)(0x60ACE907)
-I (../Core/Inc/typedef.h)(0x6493EFE1)
+I (../Core/Inc/typedef.h)(0x649D72F8)
 F (../Core/Src/stm32f1xx_hal_timebase_tim.c)(0x648C3906)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3 -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Time64/-I.\RTE\_mnp_RTOS-IC:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_FULL_LL_DRIVER -DUSE_HAL_DRIVER -DSTM32F103xB-o mnp_rtos\stm32f1xx_hal_timebase_tim.o --omf_browse mnp_rtos\stm32f1xx_hal_timebase_tim.crf --depend mnp_rtos\stm32f1xx_hal_timebase_tim.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x60ACE905)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x648C497E)

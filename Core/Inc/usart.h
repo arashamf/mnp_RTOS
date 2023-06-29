@@ -42,12 +42,11 @@ void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 uint8_t UartGetc(uint8_t count);
-void MNP_UART_PutByte(char c);
-void MNP_UART_PutString(const char *str);
+void MNP_UART_PutByte(uint8_t c);
+void MNP_UART_MSG_Puts(const uint8_t *, uint16_t );
 void UART2_PutByte(char c);
 void UART2_PutString(const char *str);
 void UART_CharReception_Callback (void);
-void MNP_UART_Puts(USART_TypeDef *, const uint8_t *, uint16_t );
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

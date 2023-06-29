@@ -60,3 +60,4 @@ mnp_rtos\main.o: ../Core/Inc/tim.h
 mnp_rtos\main.o: ../Core/Inc/usart.h
 mnp_rtos\main.o: ../Core/Inc/ring_buffer.h
 mnp_rtos\main.o: ../Core/Inc/gpio.h
+mnp_rtos\main.o: ../Core/Inc/MNP_msg.h

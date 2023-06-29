@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "MNP_msg.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,7 +94,7 @@ int main(void)
 //  MX_TIM3_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
-
+	MKS2_CAN_Init();
 
   /* USER CODE END 2 */
 

@@ -51,15 +51,25 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-	
+
 MNP_MSG_t MNP_PUT_MSG; //иницализация шаблона сообщения для отправки приёмнику
 MNP_MSG_t MNP_GET_MSG =
 {
 	.rx_state = __SYNC_BYTE1 //иницализация структуры сообщения полученного от приёмника
 };
 
+MNP_M7_CFG_t MNP_M7_CFG = //иницализация шаблона структуры перезагрузки и настройки приёмника
+{
+	
+	.cfg_state = __SYNC_RST ,
+	.parse_delay = GPS_PARSE_DELAY,
+	.cfg_msg_delay = GPS_CFG_MSG_DELAY,
+	.rst_delay = GPS_RST_DELAY,	//задержка для перезагрузки приёмника
+};
+
 osTimerId osProgTimerGPSUARTTimeout;  
 osTimerId osProgTimerGPSCfg;
+osTimerId osProgTimerGPSReset;
 
 osThreadId Task_Parse_GPS_msg_Handle;
 osThreadId Task_Switch_Led_Handle;
@@ -72,6 +82,7 @@ osThreadId defaultTaskHandle;
 
 void osProgTimerGPSUARTTimeoutCallback(void const *argument);
 void osProgTimerGPSCfgCallback (void const *argument);
+void osProgTimerGPSResetCallback (void const *argument);
 
 void Parse_GPS_msg (void const * argument);
 void Switch_Led (void const * argument);
@@ -136,6 +147,9 @@ void MX_FREERTOS_Init(void) {
   osTimerDef (osTimerGPSUARTTimeout, osProgTimerGPSUARTTimeoutCallback);
 	osProgTimerGPSUARTTimeout = osTimerCreate(osTimer (osTimerGPSUARTTimeout), osTimerPeriodic, NULL);
 	
+	osTimerDef (osTimerGPSReset, osProgTimerGPSResetCallback);
+	osProgTimerGPSReset = osTimerCreate(osTimer (osTimerGPSReset), osTimerOnce, NULL);
+	
 	osTimerDef (osTimerGPSCfg, osProgTimerGPSCfgCallback);
 	osProgTimerGPSCfg = osTimerCreate(osTimer (osTimerGPSCfg), osTimerOnce, NULL);
   /* USER CODE END RTOS_TIMERS */
@@ -175,13 +189,8 @@ void StartDefaultTask(void const * argument)
 	osDelay (1000);
 	
   for(;;)
-  {
-	/*	read_config_MNP (&MNP_PUT_MSG);
-		//Read_SN (&MNP_PUT_MSG);
-    osDelay(5000);*/
-		
-		//read_config_MNP (&MNP_PUT_MSG);
-		//put_msg2000 (&MNP_PUT_MSG);
+  {	
+		read_config_MNP (&MNP_PUT_MSG);
 		osDelay(5000);
   }
   /* USER CODE END StartDefaultTask */
@@ -198,12 +207,17 @@ void Parse_GPS_msg (void const * argument)
 	
 	for(;;)
   {
-		result = (Parse_MNP_MSG (&MNP_GET_MSG)); //парсинг сообщения от приёмника		
-		if (result > 0) //если сообщение от приёмника получено
+	//	result = (GPS_wait_data_Callback (&MNP_GET_MSG)); //парсинг сообщения от приёмника		
+		if ((result = (GPS_wait_data_Callback (&MNP_GET_MSG))) > 0) //если сообщение от приёмника получено успешно
 		{
-		//	osTimerStart(osProgTimerGPSUARTTimeout, 5000); //перегрузка таймера обработки таймаута
+			osTimerStart(osProgTimerGPSUARTTimeout, 5000); //перегрузка таймера обработки таймаута
+			if (MKS2.tmContext.ValidTHRESHOLD == 0) //если сообщение получено, но данные недостоверны
+			{
+				MNP_M7_CFG.parse_delay = 1000;
+				osTimerStart(osProgTimerGPSReset, 50); //запуск таймера перезагрузки модуля				
+			}
 		}
-		osDelayUntil (&tickcount, 100);
+		osDelayUntil (&tickcount, MNP_M7_CFG.parse_delay);
 	}
 }
 
@@ -221,6 +235,9 @@ void Switch_Led (void const * argument)
 //------------------------------------------------------------------------------------------//
 void osProgTimerGPSUARTTimeoutCallback(void const *argument)
 {
+		sprintf (buffer_TX_UART2, "gps_timeout\r\n");
+		UART2_PutString (buffer_TX_UART2);
+		osTimerStart(osProgTimerGPSReset, 50); //запуск таймера перезагрузки модуля
 	//MNP_Reset(&MNP_PUT_MSG); //отправка команды перезагрузки приёмника
 	//osTimerStart(osProgTimerGPSCfg, GPS_RST_DELAY); //задержка перед отправкой конф. сообщения приёмнику
 }
@@ -228,8 +245,31 @@ void osProgTimerGPSUARTTimeoutCallback(void const *argument)
 //------------------------------------------------------------------------------------------//
 void osProgTimerGPSCfgCallback (void const *argument)
 {
-	GPS_Init(&MNP_PUT_MSG);
+	switch(MNP_M7_CFG.cfg_state) 
+	{
+		case __SYNC_RST: //если стадия аппартной перезагрузки модуля
+			//GPS_rst(DISABLE);
+			MNP_M7_CFG.cfg_state = __SYNC_LOAD_CFG;
+			osTimerStart(osProgTimerGPSCfg, MNP_M7_CFG.cfg_msg_delay);
+			break;
+		
+		case __SYNC_LOAD_CFG: //стадия отправки конф. сообщений приёмнику
+			GPS_Init(&MNP_PUT_MSG);
+			MNP_M7_CFG.parse_delay = GPS_PARSE_DELAY;
+			break;
+		
+		default:
+			break;
+	}
 }
 
+//------------------------------------------------------------------------------------------//
+void osProgTimerGPSResetCallback (void const *argument)
+{
+	MNP_Reset(&MNP_PUT_MSG);
+	//GPS_rst(ENABLE); //аппаратная перезагрузка модуля
+	MNP_M7_CFG.cfg_state = __SYNC_RST ;
+	osTimerStart(osProgTimerGPSCfg, MNP_M7_CFG.rst_delay); //запуск таймера отправки конфигурационных сообщений модулю через 500мс
+}
 /* USER CODE END Application */
 
