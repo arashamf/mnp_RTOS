@@ -41,7 +41,6 @@ void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-uint8_t UartGetc(uint8_t count);
 void MNP_UART_PutByte(uint8_t c);
 void MNP_UART_MSG_Puts(const uint8_t *, uint16_t );
 void UART2_PutByte(char c);

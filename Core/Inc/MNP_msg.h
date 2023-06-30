@@ -293,6 +293,7 @@ void read_config_MNP ( MNP_MSG_t *);
 void read_flash_MNP ( MNP_MSG_t *);
 void put_msg2000 (MNP_MSG_t *);
 void Set_GNSS_interval (MNP_MSG_t *, uint32_t );
+void Get_GNSS_interval (MNP_MSG_t *, uint32_t );
 void Read_SN (MNP_MSG_t *);
 void GPS_Init(MNP_MSG_t *);
 void GPS_rst(FunctionalState );

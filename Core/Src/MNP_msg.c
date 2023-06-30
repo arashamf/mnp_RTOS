@@ -59,9 +59,6 @@ void MNP_PutMessage (MNP_MSG_t *Msg, uint16_t MsgId, uint16_t WordsCount)
 	MNP_UART_MSG_Puts (Msg->msg_header.header_bytes, sizeof(HEAD_MNP_MSG_t));
 	MNP_UART_MSG_Puts (Msg->payload.raw_bytes, (WordsCount+1)*2);
 	
-	/*sprintf (buffer_TX_UART2, (char *)"put_MsgId=%u, byte=%u\r\n", Msg->msg_header.MNP_header.msg_id, 
-	((sizeof(HEAD_MNP_MSG_t) + (WordsCount+1)*2)));
-	UART2_PutString (buffer_TX_UART2);*/
 }
 
 
@@ -90,8 +87,8 @@ static void MNP_M7_init ( MNP_MSG_t *Msg)
 	Msg->payload.msg3006.config.iono_corr = 0x1; // Разрешение ионосферной коррекции
 	Msg->payload.msg3006.config.disable_2D = 0x0; //отключение запрета двумерной навигации
 	Msg->payload.msg3006.config.use_RAIM = 0x1; //включение алгоритма RAIM
-	Msg->payload.msg3006.config.enable_warm_startup = 0x1; //включение быстрого «горячего» старта
-	Msg->payload.msg3006.config.sys_time = 0x0; // Привязка секундной метки к времени навигационной системы 
+	Msg->payload.msg3006.config.enable_warm_startup = 0x0; //включение быстрого «горячего» старта
+	Msg->payload.msg3006.config.sys_time = 0x1; // Привязка секундной метки к времени навигационной системы 
 	Msg->payload.msg3006.config.glo_time = 0x0; // Секундная метка ГЛОНАСС / UTC(SU)
 	Msg->payload.msg3006.config.shift_meas = 0x1; // Привязка измерений к секундной метке
 	Msg->payload.msg3006.config.enable_SBAS = 0x0; //Разрешение SBAS
@@ -133,9 +130,9 @@ void read_flash_MNP ( MNP_MSG_t *Msg)
 	Msg->payload.msg3006.command_code.cmd_3006.RAM = 0x00; //1-источник - RAM приёмника
 	Msg->payload.msg3006.command_code.cmd_3006.flash = 0x01; //1-источник - flash приёмника
 	Msg->payload.msg3006.command_code.cmd_3006.write = 0x00; //0-чтение уставок, 1-запись уставок
-	Msg->payload.msg3006.command_code.cmd_3006.code = 0x02; //6 32-разрядных слов конфигурации
 	Msg->payload.msg3006.command_code.cmd_3006.dummy1 = 0x00;
 	Msg->payload.msg3006.command_code.cmd_3006.dummy2 = 0x00;
+	Msg->payload.msg3006.command_code.cmd_3006.code = 0x02; //6 32-разрядных слов конфигурации
 	Msg->payload.msg3006.command_code.dummy = 0x00; //резерв
 	
 	MNP_PutMessage (Msg, MSG_3006, (sizeof(Msg->payload.msg3006.command_code)/ 2)); //чтение настроек из flash приёмника
@@ -161,6 +158,28 @@ void Set_GNSS_interval (MNP_MSG_t *Msg, uint32_t inerval)
 	Msg->payload.msg3006.interval = inerval; //Длина интервала измерения, 2000 соответствует 1с
 	
 	MNP_PutMessage (Msg, MSG_3006, (sizeof(Msg->payload.msg3006.interval) + sizeof(Msg->payload.msg3006.command_code))/2);
+/*	sprintf (buffer_TX_UART2, (char *)"put_MsgId=%u, byte=%u\r\n", Msg->msg_header.MNP_header.msg_id, 
+	(sizeof(Msg->payload.msg3006.interval) + sizeof(Msg->payload.msg3006.command_code)));
+	UART2_PutString (buffer_TX_UART2);*/
+}
+
+//-----------------------------------------------------------------------------------------------------//
+void Get_GNSS_interval (MNP_MSG_t *Msg, uint32_t inerval)
+{
+	Msg->payload.msg3006.command_code.cmd_3006.RAM = 0x01; //источник - RAM приёмника
+	Msg->payload.msg3006.command_code.cmd_3006.flash = 0x00; //источник - flash приёмника
+	Msg->payload.msg3006.command_code.cmd_3006.write = 0x00; //запись уставок
+	Msg->payload.msg3006.command_code.cmd_3006.dummy1 = 0x00;
+	Msg->payload.msg3006.command_code.cmd_3006.dummy2 = 0x00;	
+	Msg->payload.msg3006.command_code.cmd_3006.code = 0x07; //настройка длины интервала измерения
+	Msg->payload.msg3006.command_code.dummy = 0x00; //резерв
+	
+	Msg->payload.msg3006.interval = inerval; //Длина интервала измерения, 2000 соответствует 1с
+	
+	MNP_PutMessage (Msg, MSG_3006, (sizeof(Msg->payload.msg3006.interval) + sizeof(Msg->payload.msg3006.command_code))/2);
+/*	sprintf (buffer_TX_UART2, (char *)"put_MsgId=%u, byte=%u\r\n", Msg->msg_header.MNP_header.msg_id, 
+	(sizeof(Msg->payload.msg3006.interval) + sizeof(Msg->payload.msg3006.command_code)));
+	UART2_PutString (buffer_TX_UART2);*/
 }
 
 //-----------------------------------------------------------------------------------------------------//
@@ -299,18 +318,13 @@ static int8_t Parse_MNP_MSG (MNP_MSG_t * Msg)
 					switch ( Msg->msg_header.MNP_header.msg_id ) //проверка  идентификатора типа кадра
 					{
 						case MSG_3000:
-							//sprintf (buffer_TX_UART2, (char *)"id=%x, data_size=%x, crc=%x, dummy=%x\r\n", MSG->msg_header.MNP_header.msg_id, MSG->msg_header.MNP_header.data_size,
+						//	sprintf (buffer_TX_UART2, (char *)"id=%x, data_size=%x, crc=%x, dummy=%x\r\n", MSG->msg_header.MNP_header.msg_id, MSG->msg_header.MNP_header.data_size,
 						//	MSG->msg_header.MNP_header.chksum, MSG->msg_header.MNP_header.dummy);				
 						//	UART2_PutString (buffer_TX_UART2);
 						
 							sprintf (buffer_TX_UART2, (char *)"hour=%d,min=%d,sec=%d\r\n", Msg->payload.msg3000.hour,  
 							Msg->payload.msg3000.minute, Msg->payload.msg3000.second);
 							UART2_PutString (buffer_TX_UART2);
-
-						//	tDOP = sqrt ((pow(MSG->payload.msg3000.gDOP,2) - pow(MSG->payload.msg3000.pDOP,2)));
-						//	sprintf (buffer_TX_UART2, (char *)"pDOP=%0.2f, gDOP=%0.2f, %u %u\r\n", Msg->payload.msg3000.pDOP, 
-						//	Msg->payload.msg3000.gDOP, Msg->payload.msg3000.flags.GPS, Msg->payload.msg3000.flags.UTC);
-						//	UART2_PutString (buffer_TX_UART2);
 							ret = 1; //результат парсинга равен 1 
 							break;
 						
@@ -339,8 +353,14 @@ static int8_t Parse_MNP_MSG (MNP_MSG_t * Msg)
 							break;
 						
 						case MSG_3006: 	
-							sprintf (buffer_TX_UART2, (char *)"get msg3006, id=%x, data_size=%x\r\n", Msg->msg_header.MNP_header.msg_id, Msg->msg_header.MNP_header.data_size);				
+							sprintf (buffer_TX_UART2, (char *)"get msg3006, data_size=%x, code=%u\r\n", Msg->msg_header.MNP_header.data_size, 
+							Msg->payload.msg3006.command_code.cmd_3006.code);				
 							UART2_PutString (buffer_TX_UART2);
+							if (Msg->payload.msg3006.command_code.cmd_3006.code == 7)
+							{
+								sprintf (buffer_TX_UART2, (char *)"interval=%u\r\n",Msg->payload.msg3006.interval);
+								UART2_PutString (buffer_TX_UART2);
+							}
 							ret = 6; //результат парсинга равен 6
 							break;
 						

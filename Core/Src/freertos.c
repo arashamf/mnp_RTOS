@@ -183,14 +183,15 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+//	osDelay (100);
 	GPS_Init(&MNP_PUT_MSG);
-	osDelay (1000);
-	//Set_GNSS_interval (&MNP_PUT_MSG, 2000); //2000=1c, 1000=5c
-	osDelay (1000);
+	osDelay (100);
+	Set_GNSS_interval (&MNP_PUT_MSG, 2000); //2000=1c
+	osDelay (100);
 	
   for(;;)
   {	
-		read_config_MNP (&MNP_PUT_MSG);
+		//Get_GNSS_interval (&MNP_PUT_MSG, 10000); //2000=1c, 1000=5c
 		osDelay(5000);
   }
   /* USER CODE END StartDefaultTask */
