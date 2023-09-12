@@ -1,5 +1,4 @@
 mnp_rtos\mnp_msg.o: ..\Core\Src\MNP_msg.c
-mnp_rtos\mnp_msg.o: ../Core/Inc/MNP_msg.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/main.h
 mnp_rtos\mnp_msg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/stm32f1xx_hal_conf.h
@@ -42,6 +41,7 @@ mnp_rtos\mnp_msg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h
 mnp_rtos\mnp_msg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/typedef.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/main.h
+mnp_rtos\mnp_msg.o: ../Core/Inc/MNP_msg.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/usart.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/ring_buffer.h
 mnp_rtos\mnp_msg.o: ../Core/Inc/protocol.h
@@ -49,6 +49,13 @@ mnp_rtos\mnp_msg.o: ../Core/Inc/pins.h
 mnp_rtos\mnp_msg.o: ../Time64/time64.h
 mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
 mnp_rtos\mnp_msg.o: ../Time64/time64_config.h
-mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-mnp_rtos\mnp_msg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+mnp_rtos\mnp_msg.o: ../Core/Inc/FreeRTOSConfig.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+mnp_rtos\mnp_msg.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h

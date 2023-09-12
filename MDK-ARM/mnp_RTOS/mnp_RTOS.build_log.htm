@@ -5,10 +5,10 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.36.0.0
 Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Aleksey Skupov, NIIChasprom, LIC=ZB4EI-TPP5X-WFLI7-EAKXM-6DJAG-3EK79
+License Information: Aleksei Skupov, NIICHASPROM, LIC=X1E4T-RITMK-YDGK5-GZ4W4-2UWXS-W94Y2
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.36.0.0
+Toolchain:       MDK-ARM Professional  Version: 5.36.0.0
 Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 7 (build 960)
 Assembler:       Armasm.exe V5.06 update 7 (build 960)
@@ -21,48 +21,88 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-D:\DOCS\STM32_works\mnp_RTOS\MDK-ARM\mnp_RTOS.uvprojx
-Project File Date:  06/22/2023
+E:\DOCS\STM32_works\mnp_RTOS\MDK-ARM\mnp_RTOS.uvprojx
+Project File Date:  09/12/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'mnp_RTOS'
-compiling MNP_msg.c...
-..\Core\Src\MNP_msg.c(207): warning:  #177-D: function "GPS_RST"  was declared but never referenced
-  static void GPS_RST(FunctionalState NewState)
-..\Core\Src\MNP_msg.c: 1 warning, 0 errors
 compiling freertos.c...
+../Core/Src/freertos.c(187): error:  #140: too many arguments in function call
+  	GPS_Init(&MNP_PUT_MSG);
+../Core/Src/freertos.c(212): error:  #140: too many arguments in function call
+  		if ((result = (GPS_wait_data_Callback (&MNP_GET_MSG))) > 0) //если сообщение от приёмника получено успешно
 ../Core/Src/freertos.c(205): warning:  #550-D: variable "result"  was set but never used
-        int8_t result = -1;
-../Core/Src/freertos.c: 1 warning, 0 errors
-linking...
-Program Size: Code=28920 RO-data=1100 RW-data=756 ZI-data=8780  
-FromELF: creating hex file...
-"mnp_RTOS\mnp_RTOS.axf" - 0 Error(s), 2 Warning(s).
+  	int8_t result = -1;
+../Core/Src/freertos.c(258): error:  #140: too many arguments in function call
+  			GPS_Init(&MNP_PUT_MSG);
+../Core/Src/freertos.c: 1 warning, 3 errors
+compiling MNP_msg.c...
+..\Core\Src\MNP_msg.c(198): error:  #136: struct "<unnamed>"  has no field "time_data_ready"
+  	MKS2.tmContext.time_data_ready = 0;						//флаг готовности данных времени
+..\Core\Src\MNP_msg.c(199): error:  #136: struct "<unnamed>"  has no field "put_PPS"
+  	MKS2.tmContext.put_PPS = 0;										//флаг отправки метки времени
+..\Core\Src\MNP_msg.c(207): error:  #136: struct "<unnamed>"  has no field "sum_bad_msg"
+  	MKS2.tmContext.sum_bad_msg = 0,  ////количество подряд принятых "плохих" сообщений от приёмника (GDOP > 20)
+..\Core\Src\MNP_msg.c(217): warning:  #223-D: function "timer_delay" declared implicitly
+  	timer_delay (50);
+..\Core\Src\MNP_msg.c(224): warning:  #223-D: function "memset" declared implicitly
+  	memset ((void *)&Msg->payload.msg3006, 0, (sizeof(Msg->payload.msg3006.command_code)+sizeof(Msg->payload.msg3006.reset_mask)));
+..\Core\Src\MNP_msg.c(439): error:  #136: struct "<unnamed>"  has no field "sum_bad_msg"
+  		if (MKS2.tmContext.sum_bad_msg > 0)
+..\Core\Src\MNP_msg.c(440): error:  #136: struct "<unnamed>"  has no field "sum_bad_msg"
+  			{MKS2.tmContext.sum_bad_msg--;} //уменьшение накопленной ошибки принятия "плохих" пакетов
+..\Core\Src\MNP_msg.c(464): error:  #136: struct "<unnamed>"  has no field "sum_bad_msg"
+  			MKS2.tmContext.sum_bad_msg++; //увеличение накопленной ошибки принятия "плохих" (gDOP > 20) пакетов
+..\Core\Src\MNP_msg.c(465): error:  #136: struct "<unnamed>"  has no field "sum_bad_msg"
+  			if (MKS2.tmContext.sum_bad_msg >= 150) //если принято более 120 "плохих" пакетов
+..\Core\Src\MNP_msg.c(467): error:  #136: struct "<unnamed>"  has no field "sum_bad_msg"
+  				MKS2.tmContext.sum_bad_msg = 0;
+..\Core\Src\MNP_msg.c(489): warning:  #223-D: function "Reload_Timer_GPS_UART_Timeout" declared implicitly
+  			Reload_Timer_GPS_UART_Timeout(); //перегрузка таймера обработки таймаута
+..\Core\Src\MNP_msg.c(494): error:  #136: struct "<unnamed>"  has no field "put_PPS"
+  				if ((MKS2.tmContext.Valid == 1) && (MKS2.tmContext.put_PPS == 1)) //разрешение отправки сообщения A при достоверной информации от приемника
+..\Core\Src\MNP_msg.c(496): error:  #136: struct "<unnamed>"  has no field "time_data_ready"
+  					MKS2.tmContext.time_data_ready = 1; //установка флага получения валидных данных времени от приёмника	
+..\Core\Src\MNP_msg.c(497): error:  #136: struct "<unnamed>"  has no field "put_PPS"
+  					MKS2.tmContext.put_PPS = 0; //сброс флага отправки секундной метки
+..\Core\Src\MNP_msg.c(508): warning:  #223-D: function "GPS_Reset" declared implicitly
+  	GPS_Reset(ENABLE); //активация пина перезагрузки приёмника
+..\Core\Src\MNP_msg.c(509): warning:  #223-D: function "timer_delay" declared implicitly
+  	timer_delay (GPS_RST_DELAY); //задержка ~5 мс
+..\Core\Src\MNP_msg.c(513): warning:  #223-D: function "Reload_Timer_GPS_UART_Timeout" declared implicitly
+  	Reload_Timer_GPS_UART_Timeout(); //перегрузка таймера обработки таймаута принятия данных от приёмника
+..\Core\Src\MNP_msg.c(522): warning:  #223-D: function "timer_delay" declared implicitly
+  	timer_delay (GPS_CFG_MSG_DELAY); //задержка для перезагрузки приёмника
+..\Core\Src\MNP_msg.c(524): warning:  #223-D: function "Reload_Timer_GPS_UART_Timeout" declared implicitly
+  	Reload_Timer_GPS_UART_Timeout(); //перегрузка таймера обработки таймаута принятия данных от приёмника
+..\Core\Src\MNP_msg.c: 8 warnings, 11 errors
+"mnp_RTOS\mnp_RTOS.axf" - 14 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
-                ARM.CMSIS.5.9.0
+                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
+                ARM.CMSIS.5.8.0
                 CMSIS (Common Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.6.0
+   * Component: CORE Version: 5.5.0
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.0.pack
-                Keil.STM32F1xx_DFP.2.4.0
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
                 STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_mnp_RTOS
-  C:\Users\ASkupov\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
-  C:\Users\ASkupov\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include
+  C:\Users\ASkupov.CHASPROM\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include
+  C:\Users\ASkupov.CHASPROM\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.6.0
+   * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:13
+Target not created.
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

@@ -7,15 +7,17 @@ extern "C" {
 #endif
 
 // Includes ------------------------------------------------------------------------//
-#include "main.h"
 #include "typedef.h"
+
 //Private defines ------------------------------------------------------------------//
 #define SPECIAL_CMD_ID 1
-#define SPECIAL_CMD_CODE_RESET 12
+#define SPECIAL_CMD_CODE_RESET 12 //сброс исходных данных приёмника
 #define CMD_CODE_CONFIG 2
 #define CMD_CODE_SATTELITES_MASK 6
 
 //Exported types -----------------------------------------------------------------//
+
+//------------------------------------------------------------------
 typedef enum
 {
 	MSG_3000      = 0x0BB8, //messages 3000
@@ -66,19 +68,19 @@ typedef struct
 			uint32_t      					: 32; //1 слово - резерв (0x0)
 			//первое 32 разрядное слово
 			uint32_t protocol0			: 8; 	// Протокол обмена канала0. 0x1-MNP binary, 0х8-NMEA-0183 (0x8)
-			uint32_t      					: 14; //Резерв (0x0)
+			uint32_t dummy0     		: 14; //Резерв (0x0)
 			uint32_t baud_divider0	: 10; //предделитель UART0 = 460800/baudrate (0x60)
 			//второе 32 разрядное слово
 			uint32_t protocol1			: 8; // Протокол обмена канала1 - MNP binary, 8 - NMEA-0183 (0x1)
-			uint32_t      					: 14; //Резерв (0x0)
+			uint32_t dummy1       	: 14; //Резерв (0x0)
 			uint32_t baud_divider1	: 10; //предделитель UART1 = 460800/baudrate (0x4)
 			//третье 32 разрядное слово
-			uint32_t      					: 32;  //Резерв (0x0)
+			uint32_t dummy2     		: 32;  //Резерв (0x0)
 			//четвёртое 32 разрядное слово
-			uint32_t      					: 2;  //Резерв (0x0)
+			uint32_t dummy3       	: 2;  //Резерв (0x0)
 			uint32_t tropo_corr			: 1; // Разрешение использования модели тропосферы (0x1)
 			uint32_t use_difc				: 1; // Разрешение использования дифференциальных поправок (0x1)
-			uint32_t      					: 2; //Резерв (0x0)
+			uint32_t dummy4      					: 2; //Резерв (0x0)
 			uint32_t dif_only				: 1; // Принудительное использование дифференциального режима (0x0) 
 			uint32_t sol_smooth			: 1; // Фиксация координат при скорости менее 1 м/c (0x0) 
 			uint32_t sol_filter			: 1; // Сглаживание решения (0x1)
@@ -87,7 +89,8 @@ typedef struct
 			uint32_t disable_2D			: 1; // Запрет двумерной навигации (0x0)
 			uint32_t use_RAIM				: 1; // Включение алгоритма RAIM (0x1)
 			uint32_t enable_warm_startup	: 1; // Разрешение быстрого «горячего» старта (0x1)
-			uint32_t      					: 2; //Резерв  (0x1)  
+			uint32_t true_PPS     	: 1; 			//
+			uint32_t inst_velocity  : 1;
 			// биты  sys_time и glo_time определяют привязку  измерений и фронта секундной метки времени:
 			// glo_time | sys_time | привязка
 			// --------------------------------
@@ -101,23 +104,24 @@ typedef struct
 			uint32_t enable_SBAS				: 1; //Разрешение SBAS (0x0)
 			uint32_t enable_iono_SBAS		: 1; //Разрешение модели ионосферы SBAS (0x0)
 			uint32_t GPS_compatibility	: 1; //Режим совместимости с приемниками GPS. В сообщениях NMEA-0183 всегда принудительно ставится префикс $GP (0x0)
-			uint32_t      							: 2; //Резерв (0x0)
+			uint32_t fake_PPS      			: 1; //
+			uint32_t fake_M3						: 1; //
 			uint32_t wr_alms 						: 1; // Разрешение сохранения в flash альманахов (0x1)
 			uint32_t wr_ephs   					: 1; // Разрешение сохранения в flash эфемерид (0x1)
 			uint32_t wr_ionoutc					: 1; // Разрешение сохранения в flash модели UTC GPS (0x1)
 			uint32_t wr_coords					: 1; // Разрешение сохранения в flash координат (0x1)
-			uint32_t      							: 4;  //Резерв (0x1)
+			uint32_t dummy6     							: 4;  //Резерв (0x1)
 			//пятое слово
 			uint32_t enable_3000_1000_GGA_0	: 1; //Разрешение кадра 3000/1000/«GGA» по каналу 0 (0x1)
 			uint32_t enable_3011_1002_GSA_0	: 1; //Разрешение кадра 3011/1002/«GSA» по каналу 0 (0x1)
 			uint32_t enable_3002_1003_GSV_0	: 1; //Разрешение кадра 3002/1003/«GSV» по каналу 0 (0x1)
 			uint32_t enable_3003_1012_RMC_0	: 1; //Разрешение кадра 3003/1012/«RMC» по каналу 0 (0x1)
-			uint32_t      									: 4;  //Резерв (0x0)
+			uint32_t dummy7     									: 4;  //Резерв (0x0)
 			uint32_t enable_3000_1000_GGA_1	: 1; //Разрешение кадра 3000/1000/«GGA» по каналу 1 (0x1)
 			uint32_t enable_3011_1002_GSA_1	: 1; //Разрешение кадра 3011/1002/«GSA» по каналу 1 (0x1)
 			uint32_t enable_3002_1003_GSV_1	: 1; //Разрешение кадра 3002/1003/«GSV» по каналу 1 (0x1)
 			uint32_t enable_3003_1012_RMC_1	: 1; //Разрешение кадра 3003/1012/«RMC» по каналу 1 (0x0)
-			uint32_t      									: 20;  //Резерв (0x0)
+			uint32_t dummy8     									: 20;  //Резерв (0x0)
 
 		} config;
 
@@ -134,7 +138,11 @@ typedef struct
 			uint32_t	BDS;*/
 		} sat_mask;
 		
-		uint32_t	interval; //Длина интервала измерения (2000=1c), код команды 0х07
+		struct // Команда CMD_CODE_SATTELITES_MASK (Маска по спутникам), код 0х6
+		{				
+			uint32_t	interval; //Длина интервала измерения (2000=1c), код команды 0х07
+		} int_mask;
+	
 		
 		struct //Маска сброса (использовать с кодом команды specialcmd_3006)
 		{
@@ -143,11 +151,12 @@ typedef struct
 			uint32_t ephs    				: 1; //стирание эфемерид
 			uint32_t alm    				: 1; // стирание альманаха
 			uint32_t iono_model			: 1; //обнуление модели ионосферы/UTC GPS
-			uint32_t 								: 27; //Резерв
+			uint32_t dummy					: 27; //Резерв
 		} reset_mask;
 	};
 
 }MNP_MSG_3006_t;
+
 
 //--------------------Описание кадра 3000 - навигационное решение--------------------//
 typedef struct 
@@ -184,8 +193,8 @@ typedef struct
 			uint32_t two_dim_sol	: 1; // Двухмерное решение
 			uint32_t fix_diff			: 1; // Фиксированная невязка времени между GPS и ГЛОНАСС
 			uint32_t ellipsoid		: 2; // Эллипсоид 0-WGS-84, 1-ПЗ-90, 2- Красовского, 3 – пользователя
-			uint32_t GPS					: 1; // Годность решения
-			uint32_t UTC					: 1; // Годность времени 
+			uint32_t solution_OK	: 1; // Годность решения
+			uint32_t time_OK			: 1; // Годность времени 
 			uint32_t							: 4; // Резерв
 			uint32_t system_coord	: 3; // Система координат 0 - WGS-84, 1- ПЗ-90, 2 - СК-42, 3 - СК-95, 4 - определяется пользователем, 5-7 резерв
 			uint32_t diff_mode		: 1; // Дифференциальный режим
@@ -281,26 +290,36 @@ typedef struct
 		__PARSER
 	}rx_state;	
 
+	enum 
+	{
+		TYPE3000 = 1,
+		TYPE3001,
+		TYPE3011,
+		TYPE3002,
+		TYPE3003,
+		TYPE3006,
+		TYPE2200
+	}mnp_msg_type;	
+	
 }MNP_MSG_t;
 
 extern MKS2_t MKS2;
+extern MNP_M7_CFG_t MNP_M7_CFG;
+
 //Constants ----------------------------------------------------------------------//
+
 //Private prototypes--------------------------------------------------------------//
-static uint16_t MNP_CalcChkSum( uint16_t *Array, int WordsCount );
-void MNP_PutMessage (MNP_MSG_t *Msg, uint16_t MsgId, uint16_t WordsCount);
-static void MNP_M7_init (MNP_MSG_t *);
 void read_config_MNP ( MNP_MSG_t *);
 void read_flash_MNP ( MNP_MSG_t *);
 void put_msg2000 (MNP_MSG_t *);
 void Set_GNSS_interval (MNP_MSG_t *, uint32_t );
 void Get_GNSS_interval (MNP_MSG_t *, uint32_t );
 void Read_SN (MNP_MSG_t *);
-void GPS_Init(MNP_MSG_t *);
-void GPS_rst(FunctionalState );
-void MNP_Reset(MNP_MSG_t *);
-static int8_t Parse_MNP_MSG (MNP_MSG_t * );
-static void GPS_Read_Data(MNP_MSG_t *);
-int8_t GPS_wait_data_Callback (MNP_MSG_t *);
+void MKS_context_ini (void);
+void GPS_Init(void);
+int8_t GPS_wait_data_Callback (void);
+void GPS_Hard_Reset(void);
+void GPS_Soft_Reset(void);
 #ifdef __cplusplus
 }
 #endif

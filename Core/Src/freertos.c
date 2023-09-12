@@ -267,10 +267,9 @@ void osProgTimerGPSCfgCallback (void const *argument)
 //------------------------------------------------------------------------------------------//
 void osProgTimerGPSResetCallback (void const *argument)
 {
-	MNP_Reset(&MNP_PUT_MSG);
-	//GPS_rst(ENABLE); //аппаратная перезагрузка модуля
-	MNP_M7_CFG.cfg_state = __SYNC_RST ;
-	osTimerStart(osProgTimerGPSCfg, MNP_M7_CFG.rst_delay); //запуск таймера отправки конфигурационных сообщений модулю через 500мс
+//	MNP_Reset(&MNP_PUT_MSG);
+//	MNP_M7_CFG.cfg_state = __SYNC_RST ;
+//	osTimerStart(osProgTimerGPSCfg, MNP_M7_CFG.rst_delay); //запуск таймера отправки конфигурационных сообщений модулю через 500мс
 }
 /* USER CODE END Application */
 
